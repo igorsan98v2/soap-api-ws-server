@@ -1,0 +1,120 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://enterprise-yutsyk.lab3"
+           targetNamespace="http://enterprise-yutsyk.lab3"
+           elementFormDefault="qualified">
+
+    <xs:element name="createEnterpriseRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="enterpise" type="tns:enterprise"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name = "getEnterpriseByNameRequest" >
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="name" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name = "deleteEnterpriseRequest" >
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="name"  >
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:minLength value="1"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="updateEnterpriseRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="name">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:minLength value="1"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                <xs:element  name ="ceo" type="xs:string" />
+                <xs:element name = "founder" type="xs:string"/>
+                <xs:element name = "founded" type="xs:date"/>
+                <xs:element name = "type_of_activity" type="tns:activity"/>
+                <xs:element name = "staff" type="xs:int"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getEnterpriseByNameRespond">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="enterprise" type="tns:enterprise"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="getEnterprisesRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="page" type="xs:int"/>
+                <xs:element name="page_size" type="xs:int"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="getEnterprisesRespond">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="enterprises" type="tns:enterprise" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getEnterprisesByFounderRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="founder" type="xs:string"/>
+                <xs:element name="page" type="xs:int"/>
+                <xs:element name="page_size" type="xs:int"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getEnterprisesByNameStartedWithRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="startedWith" type="xs:string"/>
+                <xs:element name="page" type="xs:int"/>
+                <xs:element name="page_size" type="xs:int"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+
+    <xs:complexType name="enterprise">
+        <xs:sequence>
+            <xs:element name = "name"  type="xs:string"/>
+            <xs:element  name = "ceo" type="xs:string" />
+            <xs:element name = "founder" type="xs:string"/>
+            <xs:element name = "founded" type="xs:date"/>
+            <xs:element name = "type_of_activity" type="tns:activity"/>
+            <xs:element name = "staff" type="xs:int"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:simpleType name="activity">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Легка промисловість"/>
+            <xs:enumeration value="Машинобудування"/>
+            <xs:enumeration value="Продаж авто"/>
+            <xs:enumeration value="IT"/>
+            <xs:enumeration value="GameDev"/>
+            <xs:enumeration value="Продаж продуктів"/>
+
+        </xs:restriction>
+    </xs:simpleType>
+
+
+</xs:schema>
